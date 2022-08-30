@@ -1,22 +1,18 @@
-
-
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
-  name: guestbook-ui
+  name: mysite-daemonset
+  labels:
+    app: mysite-daemonset
 spec:
-  replicas: 1
-  revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: guestbook-ui
+      app: mysite-daemonset
   template:
     metadata:
       labels:
-        app: guestbook-ui
+        app : mysite-daemonset
     spec:
       containers:
-      - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
-        name: guestbook-ui
-        ports:
-        - containerPort: 80
+      - name: nginx
+        image: nginx
